@@ -113,3 +113,50 @@ optional arguments:
   -o3 , --output3       Set the output name of gene ID list of speciesB chromosome3
 ```
 
+
+
+# Pholygenomics based on JCVI and OrthoFinder2
+
+Using the JCVI, we know which blocks (chromosomes) have the synteny relationships, and then know which genes are within those corresponding blocks.
+
+Then Using the OrthoFinder2, to find the single-copy orthologues gene group in these datasets.
+
+> Note: there are difference between synteny relationships and orthologous relationships
+
+Now we have single-copy orthologues gene, but we want to dig in deeper —— What should we do?
+
+The answer is that we divide the single-copy orthologues gene dataset into exon datasets and intro datasets, and we use them to reconstruct the phylogenetic tree.
+
+> Note: Why seperate the dataset into exon and intro?
+>
+> exon is the conservative sequence, which might maintain the ancestral information, thus helping us reconstruct the evolution relationships, but there might be a clade of species which came into being in a short time and the exon sequence had not ready yet to conserve the evolution and speciation information. So we need to use the intro sequence which is not conservative, and it might posses a lot of evolution informaion which we could apply info our study.
+
+### (1) extract the exon ID from OrthoFinder2 resutls
+
+Based on the results OrthoFinder2, We can get a group of single-orthologue gene (`Single_Copy_Orthologue_Sequences`).
+
+According to the background info above, I think you're very clear about the analysis we are going to conduct below.
+
+**First**, we parse the gff information using `gffutils`.
+
+`gffdb.py`, this module contains the functions to build and load the local gff database.
+
+There are a few caveats: 
+
+- put all the gff you need to parse in the dir `gffpath`
+- make a new dir called `gffdatabase`
+
+Then you could parse the info in gff in a multiprocessing mode.
+
+
+
+**Second**, after building the database, we can extract the exon information which is provided by the single-copy orthologues using the module `singlecopyFinder.py`.
+
+You should move or copy the `Single_Copy_Orthologue_Sequences` to your working dir and then run the function `Exonbed` and write the bed file using `Writebed`.
+
+All the output files will be written into the `BED_of_Exon_of_SingleCopygene`.
+
+
+
+# To be continued
+
