@@ -158,5 +158,25 @@ All the output files will be written into the `BED_of_Exon_of_SingleCopygene`.
 
 
 
+### (2) extract exon-intron-exon structure based on RBH blast
+
+Now, you might need a little knowledge about RBH, reciprocal best hits.
+
+So when doling the sequence alignment analysis, how can I make sure the sequence A I used to blast against sequence B, is the best situation like sequence B's best pairing results is sequence A.
+
+It's pretty similar with finding a soul mate right? But we switch the contions like values, and hobbies to identity, e-value, score and so on.
+
+Using the script `pandas_exon2exon.py`, you can extract the exon-intro-exon structure from blast analysis.
+
+First, you should place the gffdatabase which is created during the `(1) extract the exon ID from OrthoFinder2 results` process.
+
+Then, you should specify the blast results path, and run the scripts like `python pandas_exon2exon.py`.
+
+And you get the resutls.
+
+> Note: the blast results should be already filtered by JCVI formats.blast module with best -n 1.
+
+
+
 # To be continued
 
